@@ -1,4 +1,4 @@
-# Contributing to ProjectName
+# Contributing to Faithlife.Ananke
 
 ## Prerequisites
 
@@ -13,6 +13,6 @@
 
 ## How to Build
 
-* Clone the repository: `git clone https://github.com/Faithlife/RepoName.git`
-* `cd RepoName`
-* `dotnet test tests/ProjectName.Tests`
+* Clone the repository: `git clone https://github.com/Faithlife/FaithlifeAnanke.git`
+* `cd FaithlifeAnanke`
+* `dotnet test tests/Faithlife.Ananke.Tests`
