@@ -1,12 +1,12 @@
-# ProjectName
+# Faithlife.Ananke
 
-**ProjectName** description
+**Faithlife.Ananke** description
 
 ## Installation
 
-ProjectName should be installed [via NuGet](https://www.nuget.org/packages/ProjectName).
+Faithlife.Ananke should be installed [via NuGet](https://www.nuget.org/packages/Faithlife.Ananke).
 
 ## Documentation
 
-* [Reference Documentation](ProjectName.md)
+* [Reference Documentation](Faithlife.Ananke.md)
 
