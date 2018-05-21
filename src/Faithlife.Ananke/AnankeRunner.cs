@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -106,6 +106,7 @@ namespace Faithlife.Ananke
 				using (m_log.BeginScope("Host {hostname}", hostname))
 					exitCode = action(m_context).GetAwaiter().GetResult();
 				SetExitCode(exitCode);
+				m_log.Exiting(exitCode);
 				return exitCode;
 			}
 			catch (OperationCanceledException) when (m_exitRequested.IsCancellationRequested)

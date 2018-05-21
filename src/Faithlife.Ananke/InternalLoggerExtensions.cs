@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Extensions.Logging;
 
 namespace Faithlife.Ananke
@@ -31,6 +31,8 @@ namespace Faithlife.Ananke
 
 		public static void Starting(this ILogger logger, string hostname) => s_starting(logger, hostname, null);
 
+		public static void Exiting(this ILogger logger, int exitCode) => s_exiting(logger, exitCode, null);
+
 		private static readonly Action<ILogger, TimeSpan, Exception> s_maximumRuntime =
 			LoggerMessage.Define<TimeSpan>(LogLevel.Information, new EventId(1, nameof(MaximumRuntime)),
 				"Maximum runtime set to {shutdownAfter}.");
@@ -58,5 +60,9 @@ namespace Faithlife.Ananke
 		private static readonly Action<ILogger, string, Exception> s_starting =
 			LoggerMessage.Define<string>(LogLevel.Information, new EventId(7, nameof(Starting)),
 				"Starting on instance {hostname}.");
+
+		private static readonly Action<ILogger, int, Exception> s_exiting =
+			LoggerMessage.Define<int>(LogLevel.Information, new EventId(8, nameof(Exiting)),
+				"Exiting with exit code {exitCode}.");
 	}
 }
