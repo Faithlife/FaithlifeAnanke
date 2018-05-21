@@ -1,4 +1,4 @@
-﻿namespace Faithlife.Ananke.Services
+namespace Faithlife.Ananke.Services
 {
 	/// <summary>
 	/// Service that exits the entire process.

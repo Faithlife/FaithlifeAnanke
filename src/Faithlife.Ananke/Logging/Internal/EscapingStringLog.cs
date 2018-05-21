@@ -1,4 +1,4 @@
-﻿namespace Faithlife.Ananke.Logging.Internal
+namespace Faithlife.Ananke.Logging.Internal
 {
 	/// <summary>
 	/// A string logger that backslash-escapes EOL characters before passing them to an inner logger. This type is threadsafe if its underlying <see cref="IStringLog"/> is threadsafe.
