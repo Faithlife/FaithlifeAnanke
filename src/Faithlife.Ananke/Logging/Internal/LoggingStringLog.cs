@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.Logging;
 
 namespace Faithlife.Ananke.Logging.Internal
@@ -12,7 +13,7 @@ namespace Faithlife.Ananke.Logging.Internal
 		/// </summary>
 		/// <param name="loggerFactory">The logger provider.</param>
 		/// <param name="stdoutParser">The parser to determine how to log messages.</param>
-		public LoggingStringLog(ILoggerFactory loggerFactory, StdoutParser stdoutParser)
+		public LoggingStringLog(ILoggerFactory loggerFactory, Action<string, ILoggerFactory> stdoutParser)
 		{
 			m_loggerFactory = loggerFactory;
 			m_stdoutParser = stdoutParser;
@@ -22,6 +23,6 @@ namespace Faithlife.Ananke.Logging.Internal
 		public void WriteLine(string message) => m_stdoutParser(message, m_loggerFactory);
 
 		private readonly ILoggerFactory m_loggerFactory;
-		private readonly StdoutParser m_stdoutParser;
+		private readonly Action<string, ILoggerFactory> m_stdoutParser;
 	}
 }

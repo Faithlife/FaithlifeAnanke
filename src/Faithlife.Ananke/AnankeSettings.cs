@@ -50,7 +50,7 @@ namespace Faithlife.Ananke
 		/// <summary>
 		/// A method that parses text written to stdout and logs it. Defaults to writing an info message for each message written to stdout.
 		/// </summary>
-		public StdoutParser StdoutParser { get; set; } = (message, provider) => provider.CreateLogger("App").LogInformation(message);
+		public Action<string, ILoggerFactory> StdoutParser { get; set; } = (message, provider) => provider.CreateLogger("App").LogInformation(message);
 
 		internal AnankeSettings(IStringLog consoleLog, Func<string, LogLevel, bool> loggerIsEnabledFilter, Func<LogEvent, string> loggerFormatter)
 		{
