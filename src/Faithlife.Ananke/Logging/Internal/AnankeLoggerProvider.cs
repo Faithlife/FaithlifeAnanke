@@ -18,7 +18,7 @@ namespace Faithlife.Ananke.Logging.Internal
 		/// <param name="stringLog">The underlying string log to which all logs are written. May not be <c>null</c>.</param>
 		/// <param name="formatter">The formatter used to translate log events into single-line strings. May not be <c>null</c>.</param>
 		/// <param name="filter">The filter for determining which log events to log. May not be <c>null</c>.</param>
-		public AnankeLoggerProvider(IStringLog stringLog, Func<LogEvent, string> formatter, LoggerIsEnabledFilter filter)
+		public AnankeLoggerProvider(IStringLog stringLog, Func<LogEvent, string> formatter, Func<string, LogLevel, bool> filter)
 		{
 			if (stringLog == null)
 				throw new ArgumentNullException(nameof(stringLog));
@@ -73,7 +73,7 @@ namespace Faithlife.Ananke.Logging.Internal
 
 		private readonly IStringLog m_stringLog;
 		private readonly Func<LogEvent, string> m_formatter;
-		private readonly LoggerIsEnabledFilter m_filter;
+		private readonly Func<string, LogLevel, bool> m_filter;
 		private readonly ConcurrentDictionary<string, ILogger> m_loggers;
 	}
 }
