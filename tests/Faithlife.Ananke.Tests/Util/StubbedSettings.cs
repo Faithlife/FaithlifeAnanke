@@ -17,7 +17,7 @@ namespace Faithlife.Ananke.Tests.Util
 
 		public StubLoggerProvider StubLoggerProvider { get; set; } = null;
 
-		public LoggerFormatter Formatter { get; set; } = null;
+		public Func<LogEvent, string> Formatter { get; set; } = null;
 
 		public StubStringLog StubStringLog { get; } = new StubStringLog(new StringWriter());
 

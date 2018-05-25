@@ -14,34 +14,24 @@ namespace Faithlife.Ananke
 		/// <summary>
 		/// A formatter that formats logs messages as formatted plain-text.
 		/// </summary>
-		/// <param name="loggerName">The name (category) of the logger. May not be <c>null</c>.</param>
-		/// <param name="logLevel">The importance of the event.</param>
-		/// <param name="eventId">The id of the event, or <c>0</c> if there is no id.</param>
-		/// <param name="message">The message. May not be <c>null</c>, but may be the empty string.</param>
-		/// <param name="exception">The exception, if any. May be <c>null</c>.</param>
-		/// <param name="state">The structured state for the message, if any. May be <c>null</c>.</param>
-		/// <param name="scope">The structured scope for the message, if any. May be an empty sequence.</param>
-		/// <param name="scopeMessages">The scope for the message (as strings), if any. May be an empty sequence.</param>
-		public static string FormattedText(string loggerName, LogLevel logLevel, EventId eventId, string message, Exception exception,
-			IEnumerable<KeyValuePair<string, object>> state, IEnumerable<IEnumerable<KeyValuePair<string, object>>> scope,
-			IEnumerable<string> scopeMessages)
+		public static string FormattedText(LogEvent logEvent)
 		{
-			if (message == "")
-				message = "Exception";
+			if (logEvent.Message == "")
+				logEvent.Message = "Exception";
 
 			var sb = new StringBuilder();
-			sb.Append(FormattedTextLogLevel(logLevel));
-			sb.Append(Escaping.BackslashEscape(loggerName));
-			if (eventId.Id != 0)
-				sb.Append("(" + eventId.Id + ")");
+			sb.Append(FormattedTextLogLevel(logEvent.LogLevel));
+			sb.Append(Escaping.BackslashEscape(logEvent.LoggerName));
+			if (logEvent.EventId.Id != 0)
+				sb.Append("(" + logEvent.EventId.Id + ")");
 			sb.Append(": ");
-			foreach (var scopeMessage in scopeMessages)
+			foreach (var scopeMessage in logEvent.ScopeMessages)
 				sb.Append(Escaping.BackslashEscape(scopeMessage) + ": ");
-			sb.Append(Escaping.BackslashEscape(message));
-			if (exception != null)
+			sb.Append(Escaping.BackslashEscape(logEvent.Message));
+			if (logEvent.Exception != null)
 			{
 				sb.Append(": ");
-				sb.Append(Escaping.BackslashEscape(exception.ToString()));
+				sb.Append(Escaping.BackslashEscape(logEvent.Exception.ToString()));
 			}
 
 			return sb.ToString();

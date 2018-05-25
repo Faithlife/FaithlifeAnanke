@@ -33,12 +33,10 @@ namespace Faithlife.Ananke.Tests
 		{
 			var actualState = new List<KeyValuePair<string, object>>();
 
-			string TestFormatter(string loggerName, LogLevel logLevel, EventId eventId, string message, Exception exception,
-				IEnumerable<KeyValuePair<string, object>> state, IEnumerable<IEnumerable<KeyValuePair<string, object>>> scope,
-				IEnumerable<string> scopeMessages)
+			string TestFormatter(LogEvent logEvent)
 			{
-				actualState.AddRange(state);
-				return message;
+				actualState.AddRange(logEvent.State);
+				return logEvent.Message;
 			}
 
 			var settings = new StubbedSettings

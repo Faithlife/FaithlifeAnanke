@@ -18,7 +18,7 @@ namespace Faithlife.Ananke.Logging.Internal
 		/// <param name="stringLog">The underlying string log to which all logs are written. May not be <c>null</c>.</param>
 		/// <param name="formatter">The formatter used to translate log events into single-line strings. May not be <c>null</c>.</param>
 		/// <param name="filter">The filter for determining which log events to log. May not be <c>null</c>.</param>
-		public AnankeLoggerProvider(IStringLog stringLog, LoggerFormatter formatter, LoggerIsEnabledFilter filter)
+		public AnankeLoggerProvider(IStringLog stringLog, Func<LogEvent, string> formatter, LoggerIsEnabledFilter filter)
 		{
 			if (stringLog == null)
 				throw new ArgumentNullException(nameof(stringLog));
@@ -49,9 +49,17 @@ namespace Faithlife.Ananke.Logging.Internal
 			if (message == "" && exception == null)
 				return;
 			// TODO: collect scope information and pass along
-			var text = m_formatter(loggerName, logLevel, eventId, message, exception, state,
-				Enumerable.Empty<IEnumerable<KeyValuePair<string, object>>>(),
-				Enumerable.Empty<string>());
+			var text = m_formatter(new LogEvent
+			{
+				LoggerName = loggerName,
+				LogLevel = logLevel,
+				EventId = eventId,
+				Message = message,
+				Exception = exception,
+				State = state,
+				Scope = Enumerable.Empty<IEnumerable<KeyValuePair<string, object>>>(),
+				ScopeMessages = Enumerable.Empty<string>()
+			});
 			m_stringLog.WriteLine(text);
 		}
 
@@ -64,7 +72,7 @@ namespace Faithlife.Ananke.Logging.Internal
 		}
 
 		private readonly IStringLog m_stringLog;
-		private readonly LoggerFormatter m_formatter;
+		private readonly Func<LogEvent, string> m_formatter;
 		private readonly LoggerIsEnabledFilter m_filter;
 		private readonly ConcurrentDictionary<string, ILogger> m_loggers;
 	}

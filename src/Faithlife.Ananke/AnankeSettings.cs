@@ -67,7 +67,7 @@ namespace Faithlife.Ananke
 		/// <param name="randomMaximumRuntimeRelativeDelta">The amount of random fluction in <see cref="MaximumRuntime"/>. E.g., <c>0.10</c> is a 10% change; if <see cref="MaximumRuntime"/> is 30 minutes, then the actual maximum runtime would be a random value between 27 and 33 minutes. Defaults to 0.10 (10%).</param>
 		/// <param name="stdoutParser">A method that parses text written to stdout.</param>
 		public static AnankeSettings Create(TimeSpan? maximumRuntime = null, ILoggerFactory loggerFactory = null,
-			LoggerIsEnabledFilter loggerIsEnabledFilter = null, LoggerFormatter loggerFormatter = null,
+			LoggerIsEnabledFilter loggerIsEnabledFilter = null, Func<LogEvent, string> loggerFormatter = null,
 			TimeSpan? exitTimeout = null, double? randomMaximumRuntimeRelativeDelta = null, StdoutParser stdoutParser = null)
 		{
 			return InternalCreate(maximumRuntime, loggerFactory, loggerIsEnabledFilter, loggerFormatter,
@@ -75,7 +75,7 @@ namespace Faithlife.Ananke
 		}
 
 		internal static AnankeSettings InternalCreate(TimeSpan? maximumRuntime = null, ILoggerFactory loggerFactory = null,
-			LoggerIsEnabledFilter loggerIsEnabledFilter = null, LoggerFormatter loggerFormatter = null,
+			LoggerIsEnabledFilter loggerIsEnabledFilter = null, Func<LogEvent, string> loggerFormatter = null,
 			TimeSpan? exitTimeout = null, double? randomMaximumRuntimeRelativeDelta = null, StdoutParser stdoutParser = null,
 			IStringLog consoleLog = null,
 			IExitProcessService exitProcessService = null, ISignalService signalService = null)
