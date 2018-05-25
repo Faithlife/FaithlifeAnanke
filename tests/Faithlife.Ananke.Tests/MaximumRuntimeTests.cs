@@ -20,8 +20,8 @@ namespace Faithlife.Ananke.Tests
 			CancellationToken exitRequested;
 			AnankeRunner.Main(settings, async context =>
 			{
-				exitRequested = context.ExitRequested;
-				await Task.Delay(settings.StubMaximumRuntime / 2, context.ExitRequested);
+				exitRequested = context.ExitRequestedToken;
+				await Task.Delay(settings.StubMaximumRuntime / 2, context.ExitRequestedToken);
 			});
 
 			AnankeSettings.Create(maximumRuntime: TimeSpan.FromHours(2));
@@ -42,8 +42,8 @@ namespace Faithlife.Ananke.Tests
 			CancellationToken exitRequested;
 			AnankeRunner.Main(settings, async context =>
 			{
-				exitRequested = context.ExitRequested;
-				await Task.Delay(settings.StubMaximumRuntime * 2, context.ExitRequested);
+				exitRequested = context.ExitRequestedToken;
+				await Task.Delay(settings.StubMaximumRuntime * 2, context.ExitRequestedToken);
 			});
 
 			Assert.That(exitRequested.IsCancellationRequested, Is.True);

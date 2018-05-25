@@ -163,7 +163,7 @@ namespace Faithlife.Ananke
 		}
 
 		/// <summary>
-		/// Initiates a shutdown. Sets <see cref="AnankeContext.ExitRequested"/> and starts the exit timeout.
+		/// Initiates a shutdown. Sets <see cref="AnankeContext.ExitRequestedToken"/> and starts the exit timeout.
 		/// </summary>
 		/// <param name="log">A delegate that writes to the console log.</param>
 		private void Shutdown(Action log)

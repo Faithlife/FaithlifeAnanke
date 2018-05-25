@@ -16,12 +16,12 @@ namespace Faithlife.Ananke
 		/// Creates an execution context for application code.
 		/// </summary>
 		/// <param name="loggerFactory">The logger factory.</param>
-		/// <param name="exitRequested">The cancellation token which is cancelled when the application is requestd to exit.</param>
+		/// <param name="exitRequestedToken">The cancellation token which is cancelled when the application is requestd to exit.</param>
 		/// <param name="loggingConsoleStdout">The logging text writer.</param>
-		public AnankeContext(ILoggerFactory loggerFactory, CancellationToken exitRequested, TextWriter loggingConsoleStdout)
+		public AnankeContext(ILoggerFactory loggerFactory, CancellationToken exitRequestedToken, TextWriter loggingConsoleStdout)
 		{
 			LoggerFactory = loggerFactory;
-			ExitRequested = exitRequested;
+			ExitRequestedToken = exitRequestedToken;
 			LoggingConsoleStdout = loggingConsoleStdout;
 		}
 
@@ -33,7 +33,7 @@ namespace Faithlife.Ananke
 		/// <summary>
 		/// The application has been requested to exit.
 		/// </summary>
-		public CancellationToken ExitRequested { get; }
+		public CancellationToken ExitRequestedToken { get; }
 
 		/// <summary>
 		/// A text writer that writes to <see cref="LoggerFactory"/>. You must explicitly request a log event by calling one of the <c>WriteLine</c> methods.
