@@ -24,8 +24,6 @@ namespace Faithlife.Ananke.Tests
 				await Task.Delay(settings.StubMaximumRuntime / 2, context.ExitRequestedToken);
 			});
 
-			AnankeSettings.Create(maximumRuntime: TimeSpan.FromHours(2));
-
 			Assert.That(exitRequested.IsCancellationRequested, Is.False);
 			Assert.That(settings.StubExitProcessService.ExitCode, Is.Zero);
 		}

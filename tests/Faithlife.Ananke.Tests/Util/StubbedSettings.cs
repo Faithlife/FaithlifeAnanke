@@ -34,9 +34,17 @@ namespace Faithlife.Ananke.Tests.Util
 				loggerFactory.AddProvider(stubs.StubLoggerProvider);
 			}
 
-			return AnankeSettings.InternalCreate(maximumRuntime: stubs.StubMaximumRuntime, exitTimeout: stubs.StubExitTimeout,
-				consoleLog: stubs.StubStringLog, loggerFormatter: stubs.Formatter, exitProcessService: stubs.StubExitProcessService,
-				signalService: stubs.StubSignalService, loggerFactory: loggerFactory);
+			var result = new AnankeSettings(stubs.StubStringLog, null, stubs.Formatter)
+			{
+				MaximumRuntime = stubs.StubMaximumRuntime,
+				ExitTimeout = stubs.StubExitTimeout,
+				ExitProcessService = stubs.StubExitProcessService,
+				SignalService = stubs.StubSignalService,
+			};
+			if (loggerFactory != null)
+				result.LoggerFactory = loggerFactory;
+
+			return result;
 		}
 	}
 }
