@@ -16,8 +16,7 @@ namespace Faithlife.Ananke.Logging
 	/// <param name="state">The structured state for the message, if any. May be <c>null</c>.</param>
 	/// <param name="scope">The structured scope for the message, if any. May be an empty sequence.</param>
 	/// <param name="scopeMessages">The scope for the message (as strings), if any. May be an empty sequence.</param>
-	public delegate string LoggerFormatter(string loggerName, LogLevel logLevel, EventId eventId, string message,
-		Exception exception,
+	public delegate string LoggerFormatter(string loggerName, LogLevel logLevel, EventId eventId, string message, Exception exception,
 		IEnumerable<KeyValuePair<string, object>> state, IEnumerable<IEnumerable<KeyValuePair<string, object>>> scope,
 		IEnumerable<string> scopeMessages);
 }
