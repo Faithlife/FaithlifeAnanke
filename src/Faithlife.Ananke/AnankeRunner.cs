@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace Faithlife.Ananke
 {
 	/// <summary>
-	/// The Ananke wrapper around your code. Normally, you should call the static <see cref="O:Faithlife.Ananke.AnankeRunner.Main"/> method rather than create instances of this type directly.
+	/// The Ananke wrapper around your code.
 	/// </summary>
 	public sealed class AnankeRunner
 	{
