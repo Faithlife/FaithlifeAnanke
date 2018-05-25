@@ -31,11 +31,14 @@ namespace Faithlife.Ananke
 		/// </summary>
 		/// <param name="settings">The settings to use for the Ananke wrapper.</param>
 		/// <param name="action">The application logic to execute.</param>
-		public static int Main(AnankeSettings settings, Func<AnankeContext, Task> action) => Main(settings, async context =>
+		public static int Main(AnankeSettings settings, Func<AnankeContext, Task> action)
 		{
-			await action(context).ConfigureAwait(false);
-			return c_successExitCode;
-		});
+			return Main(settings, async context =>
+			{
+				await action(context).ConfigureAwait(false);
+				return c_successExitCode;
+			});
+		}
 
 #pragma warning disable 1998
 		/// <summary>
