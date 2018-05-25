@@ -16,9 +16,6 @@ namespace Faithlife.Ananke
 		/// </summary>
 		public static string FormattedText(LogEvent logEvent)
 		{
-			if (logEvent.Message == "")
-				logEvent.Message = "Exception";
-
 			var sb = new StringBuilder();
 			sb.Append(FormattedTextLogLevel(logEvent.LogLevel));
 			sb.Append(Escaping.BackslashEscape(logEvent.LoggerName));
@@ -27,7 +24,8 @@ namespace Faithlife.Ananke
 			sb.Append(": ");
 			foreach (var scopeMessage in logEvent.ScopeMessages)
 				sb.Append(Escaping.BackslashEscape(scopeMessage) + ": ");
-			sb.Append(Escaping.BackslashEscape(logEvent.Message));
+			if (logEvent.Message != "")
+				sb.Append(Escaping.BackslashEscape(logEvent.Message));
 			if (logEvent.Exception != null)
 			{
 				sb.Append(": ");
