@@ -18,7 +18,7 @@ namespace Faithlife.Ananke
 		/// <param name="loggerFactory">The logger factory.</param>
 		/// <param name="exitRequestedToken">The cancellation token which is cancelled when the application is requestd to exit.</param>
 		/// <param name="loggingConsoleStdout">The logging text writer.</param>
-		public AnankeContext(ILoggerFactory loggerFactory, CancellationToken exitRequestedToken, TextWriter loggingConsoleStdout)
+		internal AnankeContext(ILoggerFactory loggerFactory, CancellationToken exitRequestedToken, TextWriter loggingConsoleStdout)
 		{
 			LoggerFactory = loggerFactory;
 			ExitRequestedToken = exitRequestedToken;

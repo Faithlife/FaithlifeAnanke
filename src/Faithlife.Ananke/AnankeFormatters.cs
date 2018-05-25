@@ -9,7 +9,7 @@ namespace Faithlife.Ananke
 	/// <summary>
 	/// Log formatters.
 	/// </summary>
-	public static class AnankeFormatters
+	internal static class AnankeFormatters
 	{
 		/// <summary>
 		/// A formatter that formats logs messages as formatted plain-text.

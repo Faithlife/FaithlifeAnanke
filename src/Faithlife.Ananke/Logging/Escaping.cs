@@ -10,7 +10,7 @@ namespace Faithlife.Ananke.Logging
 	/// <summary>
 	/// Utility class to backslash-escape EOL characters.
 	/// </summary>
-	public static class Escaping
+	internal static class Escaping
 	{
 		/// <summary>
 		/// Creates a <see cref="TextWriter"/> that backslash-escapes EOL characters. You must explicitly request an EOL by calling one of the <c>WriteLine</c> methods.
