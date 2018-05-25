@@ -158,7 +158,7 @@ namespace Faithlife.Ananke
 			var shutdownAfter = TimeSpan.FromTicks(unchecked((long) randomizedValue));
 
 			m_log.MaximumRuntime(shutdownAfter);
-			await Task.Delay(shutdownAfter);
+			await Task.Delay(shutdownAfter).ConfigureAwait(false);
 			Shutdown(() => m_log.MaximumRuntimeReached(shutdownAfter));
 		}
 
@@ -182,12 +182,13 @@ namespace Faithlife.Ananke
 		private async void ExitAfterTimeout()
 		{
 			// If ExitTimeout is zero, we want to force asynchrony so that ExitAfterTimeout returns before calling ExitPocessService.Exit.
-			await Task.Yield();
-
-			await Task.Delay(m_settings.ExitTimeout);
-			m_done.Set();
-			SetExitCode(c_exitTimeoutExitCode);
-			m_settings.ExitProcessService.Exit();
+			await Task.Run(async () =>
+			{
+				await Task.Delay(m_settings.ExitTimeout).ConfigureAwait(false);
+				m_done.Set();
+				SetExitCode(c_exitTimeoutExitCode);
+				m_settings.ExitProcessService.Exit();
+			}).ConfigureAwait(false);
 		}
 
 		private readonly AnankeSettings m_settings;
