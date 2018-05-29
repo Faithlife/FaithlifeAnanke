@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faithlife.Ananke.Logging.Internal
+namespace Faithlife.Ananke.Logging
 {
 	/// <summary>
 	/// A text writer that writes to a string log only when an explicit <c>WriteLine</c>/<c>WriteLineAsync</c> is requested or <c>Flush</c>/<c>FlushAsync</c> is invoked.

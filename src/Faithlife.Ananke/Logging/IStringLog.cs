@@ -1,4 +1,4 @@
-namespace Faithlife.Ananke.Logging.Internal
+namespace Faithlife.Ananke.Logging
 {
 	/// <summary>
 	/// Service that writes strings to a log.

@@ -7,10 +7,8 @@ using System.Text;
 
 namespace Faithlife.Ananke.Services
 {
-	/// <inheritdoc />
 	internal sealed class UnixSignalService : ISignalService
 	{
-		/// <inheritdoc />
 		public void AddHandler(Action<string> handler)
 		{
 			Console.CancelKeyPress += (_, args) =>

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Faithlife.Ananke.Logging.Internal;
+using Faithlife.Ananke.Logging;
 using Faithlife.Ananke.Services;
 using Microsoft.Extensions.Logging;
 

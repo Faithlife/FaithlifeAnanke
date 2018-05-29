@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace Faithlife.Ananke.Logging.Internal
+namespace Faithlife.Ananke.Logging
 {
 	/// <summary>
 	/// A string log that writes to an <see cref="ILogger"/>.

@@ -3,10 +3,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Faithlife.Ananke.Logging;
-using Faithlife.Ananke.Logging.Internal;
 using Faithlife.Ananke.Services;
 using Microsoft.Extensions.Logging;
-using AnankeLoggerProvider = Faithlife.Ananke.Logging.Internal.AnankeLoggerProvider;
 
 namespace Faithlife.Ananke
 {

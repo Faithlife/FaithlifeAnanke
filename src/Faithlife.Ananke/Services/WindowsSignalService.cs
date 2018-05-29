@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Faithlife.Ananke.Services
 {
-	/// <inheritdoc />
 	// See https://github.com/moby/moby/issues/25982#issuecomment-375105522 / http://www.webcitation.org/6z4QjWT0i
 	internal sealed class WindowsSignalService : ISignalService
 	{
@@ -26,7 +25,6 @@ namespace Faithlife.Ananke.Services
 				throw Marshal.GetExceptionForHR(Marshal.GetHRForLastWin32Error());
 		}
 
-		/// <inheritdoc />
 		public void AddHandler(Action<string> handler) => Handler += handler;
 
 		private bool ConsoleCtrlHandler(ConsoleControlEvent controlType)
