@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Faithlife.Ananke.Logging;
 using Microsoft.Extensions.Logging;
@@ -22,8 +23,8 @@ namespace Faithlife.Ananke
 			if (logEvent.EventId.Id != 0)
 				sb.Append("(" + logEvent.EventId.Id + ")");
 			sb.Append(": ");
-			foreach (var scopeMessage in logEvent.ScopeMessages)
-				sb.Append(Escaping.BackslashEscape(scopeMessage) + ": ");
+			foreach (var scopeMessage in logEvent.Scope.Where(ScopeStateHasStringRepresentation))
+				sb.Append(Escaping.BackslashEscape(scopeMessage.ToString()) + ": ");
 			if (logEvent.Message != "")
 				sb.Append(Escaping.BackslashEscape(logEvent.Message));
 			if (logEvent.Exception != null)
@@ -33,6 +34,14 @@ namespace Faithlife.Ananke
 			}
 
 			return sb.ToString();
+		}
+
+		private static bool ScopeStateHasStringRepresentation(object state)
+		{
+			// Follow the same logic as Seq: https://nblumhardt.com/2016/11/ilogger-beginscope/
+			if (!(state is IEnumerable<KeyValuePair<string, object>> data))
+				return true;
+			return data.Any(x => x.Key == "{OriginalFormat}");
 		}
 
 		private static string FormattedTextLogLevel(LogLevel logLevel)

@@ -43,11 +43,6 @@ namespace Faithlife.Ananke.Logging
 		/// <summary>
 		/// The structured scope for the message, if any. Will not be <c>null</c>, but may be an empty sequence.
 		/// </summary>
-		public IEnumerable<IEnumerable<KeyValuePair<string, object>>> Scope { get; set; }
-
-		/// <summary>
-		/// The scope for the message (as strings), if any. Will not be <c>null</c>, but may be an empty sequence.
-		/// </summary>
-		public IEnumerable<string> ScopeMessages { get; set; }
+		public IEnumerable<object> Scope { get; set; }
 	}
 }

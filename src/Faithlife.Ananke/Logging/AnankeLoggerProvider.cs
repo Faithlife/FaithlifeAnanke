@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
+using Faithlife.Utility;
 using Microsoft.Extensions.Logging;
 
 namespace Faithlife.Ananke.Logging
@@ -31,6 +34,7 @@ namespace Faithlife.Ananke.Logging
 			m_formatter = formatter;
 			m_filter = filter;
 			m_loggers = new ConcurrentDictionary<string, ILogger>();
+			m_scopes = new AsyncLocal<ImmutableStack<object>>();
 		}
 
 		/// <inheritdoc/>
@@ -48,7 +52,7 @@ namespace Faithlife.Ananke.Logging
 		{
 			if (message == "" && exception == null)
 				return;
-			// TODO: collect scope information and pass along
+			var scopes = Scopes.Reverse();
 			var text = m_formatter(new LogEvent
 			{
 				LoggerName = loggerName,
@@ -57,8 +61,7 @@ namespace Faithlife.Ananke.Logging
 				Message = message,
 				Exception = exception,
 				State = state,
-				Scope = Enumerable.Empty<IEnumerable<KeyValuePair<string, object>>>(),
-				ScopeMessages = Enumerable.Empty<string>()
+				Scope = scopes,
 			});
 			m_stringLog.WriteLine(text);
 		}
@@ -67,13 +70,21 @@ namespace Faithlife.Ananke.Logging
 
 		private IDisposable BeginScope<TState>(TState state)
 		{
-			// TODO: handle scopes
-			return null;
+			var previousScopes = Scopes;
+			Scopes = previousScopes.Push(state);
+			return Scope.Create(() => Scopes = previousScopes);
+		}
+
+		private ImmutableStack<object> Scopes
+		{
+			get => m_scopes.Value ?? ImmutableStack<object>.Empty;
+			set => m_scopes.Value = value.IsEmpty ? null : value;
 		}
 
 		private readonly IStringLog m_stringLog;
 		private readonly Func<LogEvent, string> m_formatter;
 		private readonly Func<string, LogLevel, bool> m_filter;
 		private readonly ConcurrentDictionary<string, ILogger> m_loggers;
+		private readonly AsyncLocal<ImmutableStack<object>> m_scopes;
 	}
 }
