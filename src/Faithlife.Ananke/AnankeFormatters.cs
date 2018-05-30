@@ -19,21 +19,21 @@ namespace Faithlife.Ananke
 		{
 			var sb = new StringBuilder();
 			sb.Append(FormattedTextLogLevel(logEvent.LogLevel));
-			sb.Append(Escaping.BackslashEscape(logEvent.LoggerName));
+			sb.Append(logEvent.LoggerName);
 			if (logEvent.EventId.Id != 0)
 				sb.Append("(" + logEvent.EventId.Id + ")");
 			sb.Append(": ");
 			foreach (var scopeMessage in logEvent.Scope.Where(ScopeStateHasStringRepresentation))
-				sb.Append(Escaping.BackslashEscape(scopeMessage.ToString()) + ": ");
+				sb.Append(scopeMessage + ": ");
 			if (logEvent.Message != "")
-				sb.Append(Escaping.BackslashEscape(logEvent.Message));
+				sb.Append(logEvent.Message);
 			if (logEvent.Exception != null)
 			{
 				sb.Append(": ");
-				sb.Append(Escaping.BackslashEscape(logEvent.Exception.ToString()));
+				sb.Append(logEvent.Exception);
 			}
 
-			return sb.ToString();
+			return Escaping.BackslashEscape(sb.ToString());
 		}
 
 		private static bool ScopeStateHasStringRepresentation(object state)
