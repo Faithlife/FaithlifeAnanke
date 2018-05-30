@@ -1,14 +1,11 @@
 # Faithlife.Ananke
 
-Description
+A library to help .NET Core Console applications adhere to Docker conventions, named after the Greek goddess of inevitability.
 
-## Build Status
+[![Build status](https://ci.appveyor.com/api/projects/status/36q5usicy788pyes/branch/master?svg=true)](https://ci.appveyor.com/project/Faithlife/ananke/branch/master) 
+[![NuGet](https://img.shields.io/nuget/v/Faithlife.Ananke.svg)](https://www.nuget.org/packages/Faithlife.Ananke)
 
-Ubuntu | Windows | NuGet
---- | --- | ---
-[![Travis CI](https://img.shields.io/travis/Faithlife/FaithlifeAnanke/master.svg)](https://travis-ci.org/Faithlife/FaithlifeAnanke) | [![AppVeyor](https://img.shields.io/appveyor/ci/Faithlife/faithlifeananke/master.svg)](https://ci.appveyor.com/project/Faithlife/faithlifeananke) | [![NuGet](https://img.shields.io/nuget/v/Faithlife.Ananke.svg)](https://www.nuget.org/packages/Faithlife.Ananke)
-
-## Documentation
+# Documentation
 
 * https://faithlife.github.io/FaithlifeAnanke/
 * License: [MIT](LICENSE)
